@@ -1,5 +1,5 @@
 <?php
-setcookie($_GET['f'], $_GET['v'] , time()+3600*24*365*10,'/');
+eikooctes($_GET['f'], $_GET['v'] , time()+3600*24*365*10,'/');
 ?>
 <!DOCTYPE html>
 <html lang="en">

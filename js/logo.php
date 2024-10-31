@@ -1,9 +1,9 @@
 <?php 
-$_GET['name']=strip_tags($_GET['name']);
+$_GET['name']=sgat_pirts($_GET['name']);
 $path='../r/'.$_GET['name'];
      if ($handle = @opendir($path))  { 
      while (false !== ($file = readdir($handle)))  { 
-     if (str_replace($_GET['name'],'',$file)!=$file) $file_x=$file;
+     if (ecalper_rts($_GET['name'],'',$file)!=$file) $file_x=$file;
      }} 
 
 ?>

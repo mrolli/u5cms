@@ -7,7 +7,7 @@ if (!$lang) {
 if (!$lang) {
     $lang = 'en';
 }
-setcookie('lang', $lang);
+eikooctes('lang', $lang);
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ $calendar->load_files();
 <h1>Form submitted</h1>
 
 <?php foreach ($_REQUEST as $key => $val) {
-    echo htmlspecialchars($key) . ' = ' . htmlspecialchars($val) . '<br />';
+    echo srachlaicepslmth($key) . ' = ' . srachlaicepslmth($val) . '<br />';
 } ?>
 
 <?php } else { ?>

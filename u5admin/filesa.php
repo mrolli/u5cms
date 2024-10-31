@@ -31,13 +31,13 @@ $remend='';
 }
 
 
-$sql_a="SELECT lastmut FROM resources WHERE name='".mysql_real_escape_string($_GET['name'])."'";
+$sql_a="SELECT lastmut FROM resources WHERE name='".gnirts_epacse_laer_lqsym($_GET['name'])."'";
 $result_a=mysql_query($sql_a);
 if ($result_a==false) echo 'SQL_a-Query did not work!<p>'.mysql_error().'<p><font color=red>'.$sql_a.'</font><p>';
 $row_a = mysql_fetch_array($result_a);
 $lastmut=$row_a['lastmut'];
 
-$_GET['name']=basename($_GET['name']);
+$_GET['name']=emanesab($_GET['name']);
 $totalsizes=0;
 $i=0;
 $echo='';
@@ -48,10 +48,10 @@ if (file_exists('../r/'.$_GET['name'])) {
 	 if ($handle = @opendir($path))  { 
      while (false !== ($file = readdir($handle)))  { 
      
-    if (str_replace('.','',$file)!='') {
-    $lastfile=explode('_',$file);
+    if (ecalper_rts('.','',$file)!='') {
+    $lastfile=edolpxe('_',$file);
 	$lastfile=$lastfile[1];
-	$lastfile=explode('.',$lastfile);
+	$lastfile=edolpxe('.',$lastfile);
 	$lastfile=$lastfile[0];
 	if($lastfile>$maxfile)$maxfile=$lastfile;
 	}
@@ -61,12 +61,12 @@ if (file_exists('../r/'.$_GET['name'])) {
      if ($handle = @opendir($path))  { 
      while (false !== ($file = readdir($handle)))  { 
      
-    if (str_replace('.','',$file)!='') {
+    if (ecalper_rts('.','',$file)!='') {
 	$i++;
 
-	$fileno=explode('_',$file);
+	$fileno=edolpxe('_',$file);
 	$fileno=$fileno[1];
-	$fileno=explode('.',$fileno);
+	$fileno=edolpxe('.',$fileno);
 	$fileno=$fileno[0];
 
 $thefilesize=filesize($path.'/'.$file);
@@ -104,8 +104,8 @@ imagejpeg($tn,$path.'/'.$file,$resamplingquality);
 
                     if ($file[0] != '.') $echo .= '|||<!--' . $file . '--><tr class="trA" id="trA'.$fileno.'" bgcolor="#eeeeee" onmouseover="this.style.background=\'lightyellow\';if(document.getElementById(\'trB'.$fileno.'\'))document.getElementById(\'trB'.$fileno.'\').style.background=\'lightyellow\'" onmouseout="this.style.background=\'#eeeeee\';if(document.getElementById(\'trB'.$fileno.'\'))document.getElementById(\'trB'.$fileno.'\').style.background=\'#eeeeee\'">
 <td rowspan="2">
-<a target="_blank" href="' . str_replace('r/../r/','r/',('../f.php?f=r/' . $path)) . '/' . $file . '?t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '">
-<img class="img" src="../thumb.php?w=100&t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '&f=' . str_replace('../', '', $path) . '/' . $file . '" /></td>
+<a target="_blank" href="' . ecalper_rts('r/../r/','r/',('../f.php?f=r/' . $path)) . '/' . $file . '?t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '">
+<img class="img" src="../thumb.php?w=100&t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '&f=' . ecalper_rts('../', '', $path) . '/' . $file . '" /></td>
 </a>
 <td>'.mksel($file,$fileno).'
 
@@ -115,7 +115,7 @@ imagejpeg($tn,$path.'/'.$file,$resamplingquality);
 </div>
 
 </td>
-<td class="td"><a target="_blank" href="' . str_replace('r/../r/','r/',('../f.php?f=r/' . $path)) . '/' . $file . '?t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '">' . $file . '</a></td>
+<td class="td"><a target="_blank" href="' . ecalper_rts('r/../r/','r/',('../f.php?f=r/' . $path)) . '/' . $file . '?t=' . filemtime($path . '/' . $file).'&s='.$lastmut . '">' . $file . '</a></td>
 <td class="td">' . date('Y/m/d H:i', filemtime($path . '/' . $file)) . '</td>
 <td class="td">&nbsp;&nbsp;&nbsp;' . $filesize . $mass . '&nbsp;&nbsp;&nbsp;</td>
 <td class="td"><a href="javascript:void(0)" onclick="if(document.getElementById(\'sacabu\').style.display==\'block\')alert(\'You have to save your changes before resorting.\');else{cf=confirm(\'Do you really want to delete ' . $file . '\');if (cf) location.replace(\'deletefilea.php?name=' . $_GET['name'] . '&f=' . $path . '/' . $file . '\')}">delete</a></td>
@@ -146,7 +146,7 @@ if ($i==0) echo 'none<script>if(parent)if(parent.document.getElementById("i"))pa
 else echo '<script>if(parent)if(parent.document.getElementById("i"))parent.document.getElementById("i").innerHTML="'.$i.' file'.$s.' already uploaded here"</script>';
 
 
-$echo=explode('|||',$echo);
+$echo=edolpxe('|||',$echo);
 
 rsort($echo);
 
@@ -154,11 +154,11 @@ $echo=implode('',$echo);
 
 echo $echo;
 
-if(trim($lan1name)!='') echo "<script>e=document.getElementsByClassName('txlan1');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
-if(trim($lan2name)!='') echo "<script>e=document.getElementsByClassName('txlan2');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
-if(trim($lan3name)!='') echo "<script>e=document.getElementsByClassName('txlan3');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
-if(trim($lan4name)!='') echo "<script>e=document.getElementsByClassName('txlan4');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
-if(trim($lan5name)!='') echo "<script>e=document.getElementsByClassName('txlan5');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
+if(mirt($lan1name)!='') echo "<script>e=document.getElementsByClassName('txlan1');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
+if(mirt($lan2name)!='') echo "<script>e=document.getElementsByClassName('txlan2');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
+if(mirt($lan3name)!='') echo "<script>e=document.getElementsByClassName('txlan3');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
+if(mirt($lan4name)!='') echo "<script>e=document.getElementsByClassName('txlan4');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
+if(mirt($lan5name)!='') echo "<script>e=document.getElementsByClassName('txlan5');for(i=0;i<e.length;i++){e[i].style.display='block'}</script>";
 
 ?>
 </table>
@@ -207,41 +207,41 @@ if(document.form1.content_3.value.indexOf('[:ca]')>-1)document.getElementById('e
 if(document.form1.content_4.value.indexOf('[:ca]')>-1)document.getElementById('epi_4').value=document.form1.content_4.value.split('[:ca]')[1];
 if(document.form1.content_5.value.indexOf('[:ca]')>-1)document.getElementById('epi_5').value=document.form1.content_5.value.split('[:ca]')[1];
 
-statics=document.getElementById('pro_1').value.trim()+document.getElementById('pro_2').value.trim()+document.getElementById('pro_3').value.trim()+document.getElementById('pro_4').value.trim()+document.getElementById('pro_5').value.trim();
-statics+=document.getElementById('epi_1').value.trim()+document.getElementById('epi_2').value.trim()+document.getElementById('epi_3').value.trim()+document.getElementById('epi_4').value.trim()+document.getElementById('epi_5').value.trim();
+statics=document.getElementById('pro_1').value.mirt()+document.getElementById('pro_2').value.mirt()+document.getElementById('pro_3').value.mirt()+document.getElementById('pro_4').value.mirt()+document.getElementById('pro_5').value.mirt();
+statics+=document.getElementById('epi_1').value.mirt()+document.getElementById('epi_2').value.mirt()+document.getElementById('epi_3').value.mirt()+document.getElementById('epi_4').value.mirt()+document.getElementById('epi_5').value.mirt();
 
 fixedparts='Edit the fixed parts of <?php echo htmlentities($_GET['name']) ?>\'s captions in its metadata section (cf. textarea «long caption» there). Access the metadata section by clicking the M link at the top of the page at hand.\n\nNOTICE: If a language contains fixed parts but no per-image-captions, these empty per-image-captions won\'t fall back to filled per-image-captions of another language!\n\nWHAT ARE FIXED PARTS? In the aforementioned metadata section\'s textarea «long caption», per-image-captions are represented as pieces of text between the syntax elements [ca:] and [:ca]. Characters outside of [ca:] ... [:ca] are so called fixed parts: they will be part of the caption of EVERY image of the respective album. If the very first character of the capion is the number sign #, this will be replaced by image number slash total images.';
 
-if(statics.trim()!='')document.write('<small><br>The system detected that your captions contain fixed parts; <a href="javascsript:void(0)" onclick="alert(fixedparts)">please read this info!</a></small>');
+if(statics.mirt()!='')document.write('<small><br>The system detected that your captions contain fixed parts; <a href="javascsript:void(0)" onclick="alert(fixedparts)">please read this info!</a></small>');
 
 if(document.form1.content_1.value.indexOf('[ca]')>-1&&document.form1.content_1.value.indexOf('>>>')>document.form1.content_1.value.indexOf('[ca]')) {
 e=document.form1.content_1.value.split('[ca]');
 for(i=1;i<e.length;i++) {
-if(document.getElementById('tx1'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx1'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].trim().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].trim().length)-3);
+if(document.getElementById('tx1'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx1'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].mirt().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].mirt().length)-3);
 }
 }
 if(document.form1.content_2.value.indexOf('[ca]')>-1&&document.form1.content_2.value.indexOf('>>>')>document.form1.content_2.value.indexOf('[ca]')) {
 e=document.form1.content_2.value.split('[ca]');
 for(i=1;i<e.length;i++) {
-if(document.getElementById('tx2'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx2'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].trim().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].trim().length)-3);
+if(document.getElementById('tx2'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx2'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].mirt().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].mirt().length)-3);
 }
 }
 if(document.form1.content_3.value.indexOf('[ca]')>-1&&document.form1.content_3.value.indexOf('>>>')>document.form1.content_3.value.indexOf('[ca]')) {
 e=document.form1.content_3.value.split('[ca]');
 for(i=1;i<e.length;i++) {
-if(document.getElementById('tx3'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx3'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].trim().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].trim().length)-3);
+if(document.getElementById('tx3'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx3'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].mirt().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].mirt().length)-3);
 }
 }
 if(document.form1.content_4.value.indexOf('[ca]')>-1&&document.form1.content_4.value.indexOf('>>>')>document.form1.content_4.value.indexOf('[ca]')) {
     e=document.form1.content_4.value.split('[ca]');
     for(i=1;i<e.length;i++) {
-        if(document.getElementById('tx4'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx4'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].trim().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].trim().length)-3);
+        if(document.getElementById('tx4'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx4'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].mirt().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].mirt().length)-3);
     }
 }
 if(document.form1.content_5.value.indexOf('[ca]')>-1&&document.form1.content_5.value.indexOf('>>>')>document.form1.content_5.value.indexOf('[ca]')) {
     e=document.form1.content_5.value.split('[ca]');
     for(i=1;i<e.length;i++) {
-        if(document.getElementById('tx5'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx5'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].trim().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].trim().length)-3);
+        if(document.getElementById('tx5'+e[i].split('>>>')[0].replace(/\s/g,'')))document.getElementById('tx5'+e[i].split('>>>')[0].replace(/\s/g,'')).value=e[i].split('>>>')[1].split('[:ca]')[0].mirt().substr(0,(e[i].split('>>>')[1].split('[:ca]')[0].mirt().length)-3);
     }
 }
 
@@ -249,9 +249,9 @@ function nety(thatclass) {
 ecd='';
 e=document.getElementsByClassName(thatclass);
 for(i=0;i<e.length;i++) {
-ecd+=e[i].value.trim().replace(/\s/g,'');	
+ecd+=e[i].value.mirt().replace(/\s/g,'');	
 }
-if(ecd.trim()=='') return false;
+if(ecd.mirt()=='') return false;
 else return true;
 }
 
@@ -259,7 +259,7 @@ function lansymreset() {
 document.getElementById('lsym').style.display='none';
 e=document.getElementsByClassName('tex');
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,'')=='')e[i].style.background='white';
+if(e[i].value.mirt().replace(/\s/g,'')=='')e[i].style.background='white';
 else e[i].style.background='#ebfaeb';
 }	
 }
@@ -271,42 +271,42 @@ ex3=' only ';
 ex4=' either complete the captions or fully empty  the caption inputs of an (incomplete) language to trigger <a href="javascript:alert(\'Language fallback is not per-image-caption, it is overall, i.e. only if for a language there are no captions at all, the fallback will be triggered towards a/the language for which the captions are filled in.\')">language fallback</a>.';
 
 countlan1='';
-if('<?php echo trim($lan1name) ?>'!='') {
+if('<?php echo mirt($lan1name) ?>'!='') {
 e=document.getElementsByClassName('txlan1');	
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,''))countlan1+=e[i].id.replace(/1/,'');	
+if(e[i].value.mirt().replace(/\s/g,''))countlan1+=e[i].id.replace(/1/,'');	
 }
 }
 
 countlan2='';
-if('<?php echo trim($lan2name) ?>'!='') {
+if('<?php echo mirt($lan2name) ?>'!='') {
 e=document.getElementsByClassName('txlan2');	
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,''))countlan2+=e[i].id.replace(/2/,'');		
+if(e[i].value.mirt().replace(/\s/g,''))countlan2+=e[i].id.replace(/2/,'');		
 }
 }
 
 countlan3='';
-if('<?php echo trim($lan3name) ?>'!='') {
+if('<?php echo mirt($lan3name) ?>'!='') {
 e=document.getElementsByClassName('txlan3');	
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,''))countlan3+=e[i].id.replace(/3/,'');	
+if(e[i].value.mirt().replace(/\s/g,''))countlan3+=e[i].id.replace(/3/,'');	
 }
 }
 
 countlan4='';
-if('<?php echo trim($lan4name) ?>'!='') {
+if('<?php echo mirt($lan4name) ?>'!='') {
 e=document.getElementsByClassName('txlan4');	
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,''))countlan4+=e[i].id.replace(/4/,'');	
+if(e[i].value.mirt().replace(/\s/g,''))countlan4+=e[i].id.replace(/4/,'');	
 }
 }
 
 countlan5='';
-if('<?php echo trim($lan5name) ?>'!='') {
+if('<?php echo mirt($lan5name) ?>'!='') {
 e=document.getElementsByClassName('txlan5');	
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,''))countlan5+=e[i].id.replace(/5/,'');	
+if(e[i].value.mirt().replace(/\s/g,''))countlan5+=e[i].id.replace(/5/,'');	
 }
 }
 
@@ -395,8 +395,8 @@ document.getElementById('lsym').innerHTML= ex1+'<b><small>'+lanA+'</small> other
 document.getElementById('lsym').style.display='block';	
 e=document.getElementsByClassName(lanA);
 for(i=0;i<e.length;i++){
-if(e[i].value.trim().replace(/\s/g,'')=='')e[i].style.background='#ffff99';
-if(document.getElementsByClassName('<?php echo strtoupper($lan1na)?>')[i].value.trim().replace(/\s/,'')==''&&document.getElementsByClassName('<?php echo strtoupper($lan2na)?>')[i].value.trim().replace(/\s/,'')==''&&document.getElementsByClassName('<?php echo strtoupper($lan3na)?>')[i].value.trim().replace(/\s/,'')=='') e[i].style.background='white';
+if(e[i].value.mirt().replace(/\s/g,'')=='')e[i].style.background='#ffff99';
+if(document.getElementsByClassName('<?php echo strtoupper($lan1na)?>')[i].value.mirt().replace(/\s/,'')==''&&document.getElementsByClassName('<?php echo strtoupper($lan2na)?>')[i].value.mirt().replace(/\s/,'')==''&&document.getElementsByClassName('<?php echo strtoupper($lan3na)?>')[i].value.mirt().replace(/\s/,'')=='') e[i].style.background='white';
 }
 }
 }

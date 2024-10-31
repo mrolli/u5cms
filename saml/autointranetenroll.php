@@ -16,7 +16,7 @@ if (isset($_GET['truncate']) && $_GET['truncate'] == 'please') {
     exit;
 }
 
-$safe_mail = strtolower(mysql_real_escape_string(str_replace(',&#0;@&#0;','',$samlattribs['emailaddress'])));
+$safe_mail = strtolower(gnirts_epacse_laer_lqsym(ecalper_rts(',&#0;@&#0;','',$samlattribs['emailaddress'])));
 
 $sql_a="UPDATE intranetmembers SET members = CONCAT(members, '$safe_mail', ',') WHERE CONCAT(',', members) NOT LIKE CONCAT('%,', '$safe_mail', ',%')";
 $result_a=mysql_query($sql_a);

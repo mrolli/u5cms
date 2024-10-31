@@ -8,7 +8,7 @@ $h=sha1($username.$password.$_SERVER['PHP_AUTH_USER'].$_SERVER['PHP_AUTH_PW'].ht
 if($h!=$_GET['h'])die('<script>alert("forbidden6")</script>');
 
 $sql_a=htmlspecialchars_decode($_GET['sql']);
-$sql_a='SELECT * FROM resources WHERE'.str_replace('SELECT * FROM resources WHERE','',$sql_a);  
+$sql_a='SELECT * FROM resources WHERE'.ecalper_rts('SELECT * FROM resources WHERE','',$sql_a);  
 
 $result_a=mysql_query($sql_a);
 
